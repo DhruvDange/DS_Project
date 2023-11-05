@@ -7,6 +7,7 @@ library(mgcv)
 death <- read.csv("./japan_deaths2.csv")
 birth <- read.csv("./japan_birth.csv")
 divorce <- read.csv("./divorce.csv")[-1,]
+divorce_yearly <- read.csv("./divorce_yearly.csv")
 
 
 # Birth data
@@ -41,6 +42,8 @@ ddf <- data.frame(
 barplot(divorce$Number, names.arg = divorce$Age, xlab = "Age Group", ylab = "Divorces", las=2, cex.names = 0.7, main = "Number of Divorces by Age", ylim = c(0, max(divorce$Number) * 1.2))
 
 barplot(ddf$Sum, names.arg = death$Age, xlab = "Age Group", ylab = "Deaths", las=2, main = "Number of Covid Deaths by Age", ylim = c(0, max(ddf$Sum) * 1.2))
+
+barplot(divorce_yearly$Number, names.arg = divorce_yearly$Year, xlab = "Year", ylab = "Divorces", las=2, cex.names = 0.7, main = "Number of Divorces by Year", ylim = c(0, max(divorce_yearly$Number) * 1.2))
 
 plot(1:nrow(bdf20), bdf20$Value, type = "l", xlab = "Index", ylab = "Births", main = "Births per Month", xaxt = "n")
 axis(1, at = 1:nrow(bdf20), labels = paste(bdf20$Year, bdf20$Month, sep = "-"), las = 2, cex.axis = 0.7)
@@ -116,6 +119,5 @@ predict_outcome <- function(age) {
   }
 }
 
-age <- 85
-
+age <- 30
 predict_outcome(age)
